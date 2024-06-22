@@ -69,7 +69,7 @@ class TestHBNBCommandCreate(unittest.TestCase):
         mock_storage.save = MagicMock()
         
         with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
-            self.cmd.do_create('BaseModel number=123.456')
+            self.cmd.do_create('BaseModel number="123.456"')
             output = mock_stdout.getvalue().strip()
             self.assertTrue(len(output) > 0)
 
