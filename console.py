@@ -145,9 +145,8 @@ class HBNBCommand(cmd.Cmd):
                     value = int(value)
                 except ValueError:
                     continue
-
             kwargs[key] = value
-        new_instance = HBNBCommand.classes[arguments[0]](kwargs)
+        new_instance = HBNBCommand.classes[arguments[0]](**kwargs)
         new_instance.save()
         print(new_instance.id)
 
