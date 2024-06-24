@@ -11,10 +11,10 @@ class FileStorage:
     def all(self, cls=None):
         """Returns the list of objects of one type of class."""
         if cls is None:
-            return list(FileStorage.__objects.values())
+            return FileStorage.__objects.copy()  # Return a copy of all objects
         else:
-            return [obj for obj in FileStorage.__objects.values() if isinstance(obj, cls)]
-        
+            return {obj_id: obj for obj_id, obj in FileStorage.__objects.items() if isinstance(obj, cls)}
+
     def delete(self, obj=None):
         """ a new public instance method to delete obj from __objects"""
         if obj is not None:
@@ -65,4 +65,3 @@ class FileStorage:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
         except:
             pass
-
