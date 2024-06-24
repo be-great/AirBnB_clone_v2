@@ -43,10 +43,10 @@ class DBStorage:
             for o in objs:
                 key = f"{o.__class__.__name__}.{o.id}"
                 dict_[key] = o
-
         return dict_
+
     def new(self, obj):
-        pass
+        
     def save(self):
         pass
     def delete(self, obj=None):
