@@ -25,7 +25,7 @@ class FileStorage:
                     KeyToDelete = key
                     break
                 
-                """Delete the obj"""
+            """Delete the obj"""
             if KeyToDelete is not None:
                 del FileStorage.__objects[KeyToDelete]
 
