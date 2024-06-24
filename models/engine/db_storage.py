@@ -46,10 +46,18 @@ class DBStorage:
         return dict_
 
     def new(self, obj):
-        
+        """add new object to the DB"""
+        self.__session = obj
     def save(self):
-        pass
+        """save the object to the DB"""
+        self.__session.commit()
     def delete(self, obj=None):
-        pass
+        """delete the obj to the DB"""
+        if obj:
+            self.__session.delete(obj)
     def reload(self):
-        pass
+        """reload the object"""
+        Base.metadata.create_all(self.__engine)
+        sessionmaker_ = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session = scoped_session(sessionmaker_)
+        self.__session = session()
