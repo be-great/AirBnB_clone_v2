@@ -20,5 +20,5 @@ class User(BaseModel, Base):
         last_name = ""
 
     def __init__(self, *args, **kwargs):
-        """initlize users to BaseModel, Base"""
-        self.super().__init__(*args, **kwargs)
+        """initializes user"""
+        super().__init__(*args, **kwargs)
