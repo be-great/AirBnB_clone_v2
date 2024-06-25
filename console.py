@@ -225,7 +225,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
-
+        args = args.split(" ")
         if len(args) == 0:
             obj_ = models.storage.all()
         elif args[0] in self.classes:
