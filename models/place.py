@@ -1,8 +1,10 @@
 """ place Module for HBNB project """
 from sqlalchemy import Column, String, ForeignKey, Integer, Float
 from models.base_model import BaseModel, Base
-from models import storage_ob
-# from sqlalchemy.orm import relationship
+from models import storage_ob, storage
+from sqlalchemy.orm import relationship
+from models.review import Review
+# import models
 
 
 class Place(BaseModel, Base):
@@ -20,18 +22,29 @@ class Place(BaseModel, Base):
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
         amenity_ids = []
+        reviews = relationship('Review', backref='place', cascade='all,\
+                                delete, delete-orphan')
     else:
-        city_id = ""
-        user_id = ""
-        name = ""
-        description = ""
-        number_rooms = 0
-        number_bathrooms = 0
-        max_guest = 0
-        price_by_night = 0
-        latitude = 0.0
-        longitude = 0.0
-        amenity_ids = []
+        @property
+        def reviews(self):
+            """This is a Getter attribute that returns the list of Review
+                  instances with place_id equals to the current Place.id"""
+            list_of_review = []
+            for review in storage.all(Review).values():
+                if review.place_id == self.id:
+                    list_of_review.append(review)
+            return list_of_review
+    city_id = ""
+    user_id = ""
+    name = ""
+    description = ""
+    number_rooms = 0
+    number_bathrooms = 0
+    max_guest = 0
+    price_by_night = 0
+    latitude = 0.0
+    longitude = 0.0
+    amenity_ids = []
 
     def __init__(self, *args, **kwargs):
         """Initializes user"""
