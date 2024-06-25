@@ -10,6 +10,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class DBStorage:
     """This class would transition from the filestorage to DBstorage"""
     __engine = None
@@ -25,6 +26,7 @@ class DBStorage:
 
         if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
+
     def all(self, cls=None):
         classes = {
                'BaseModel': BaseModel, 'User': User, 'Place': Place,
@@ -32,7 +34,7 @@ class DBStorage:
                'Review': Review
               }
         dict_ = {}
-        if cls == None:
+        if cls is None:
             for key, value in enumerate(classes):
                 objs = self.__session.query(value).all()
                 for o in objs:
@@ -48,16 +50,20 @@ class DBStorage:
     def new(self, obj):
         """add new object to the DB"""
         self.__session = obj
+
     def save(self):
         """save the object to the DB"""
         self.__session.commit()
+
     def delete(self, obj=None):
         """delete the obj to the DB"""
         if obj:
             self.__session.delete(obj)
+
     def reload(self):
         """reload the object"""
         Base.metadata.create_all(self.__engine)
-        sessionmaker_ = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        sessionmaker_ = sessionmaker(bind=self.__engine,
+                                     expire_on_commit=False)
         session = scoped_session(sessionmaker_)
         self.__session = session()
