@@ -1,3 +1,4 @@
+"""the script of the base_model"""
 import uuid
 from datetime import datetime
 import models

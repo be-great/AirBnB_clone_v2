@@ -1,7 +1,10 @@
+#!/usr/bin/python3
+""" user Module for HBNB project """
 from sqlalchemy import Column, String, Integer
 from models.base_model import BaseModel, Base
 from models import storage_ob
 from sqlalchemy.orm import relationship
+
 
 class User(BaseModel, Base):
     """This class defines a user by various attributes"""
