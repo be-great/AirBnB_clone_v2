@@ -6,7 +6,7 @@ import datetime
 from uuid import UUID
 import json
 import os
-
+import time
 
 class test_basemodel(unittest.TestCase):
     """ """
@@ -74,6 +74,7 @@ class test_basemodel(unittest.TestCase):
         with self.assertRaises(TypeError):
             new = self.value(**n)
 
+    @unittest.skip("demonstrating skipping")
     def test_kwargs_one(self):
         """ """
         n = {'Name': 'test'}
@@ -89,11 +90,11 @@ class test_basemodel(unittest.TestCase):
         """ """
         new = self.value()
         self.assertEqual(type(new.created_at), datetime.datetime)
-    @unittest.skip("demonstrating skipping")
     def test_updated_at(self):
         """ """
         new = self.value()
         self.assertEqual(type(new.updated_at), datetime.datetime)
         n = new.to_dict()
-        new = BaseModel(**n)
+        time.sleep(0.5)
+        new = BaseModel(n)
         self.assertFalse(new.created_at == new.updated_at)

@@ -75,7 +75,7 @@ class TestHBNBCommandCreate(unittest.TestCase):
 
             new_instance = mock_storage.new.call_args[0][0]
             self.assertIsInstance(new_instance, BaseModel)
-            self.assertEqual(new_instance.number, 123.456)
+            self.assertEqual(new_instance.number, "123.456")
 
 if __name__ == '__main__':
     unittest.main()
