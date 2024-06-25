@@ -35,7 +35,7 @@ class DBStorage:
               }
         dict_ = {}
         if cls is None:
-            for key, value in enumerate(classes):
+            for key, value in classes.items():
                 objs = self.__session.query(value).all()
                 for o in objs:
                     key = f"{o.__class__.__name__}.{o.id}"
@@ -49,7 +49,7 @@ class DBStorage:
 
     def new(self, obj):
         """add new object to the DB"""
-        self.__session = obj
+        self.__session.add(obj)
 
     def save(self):
         """save the object to the DB"""
