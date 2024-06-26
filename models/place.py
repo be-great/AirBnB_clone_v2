@@ -10,7 +10,7 @@ import models
 class Place(BaseModel, Base):
     """ Representation of a Place """
 
-    if models.storage_t == 'db':
+    if models.storage_ob == 'db':
         __tablename__ = 'places'
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
@@ -40,7 +40,7 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
-    if models.storage_t != 'db':
+    if models.storage_ob != 'db':
         @property
         def reviews(self):
             """ Getter attribute that returns the list of Review instances """
