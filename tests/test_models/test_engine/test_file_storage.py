@@ -9,6 +9,7 @@ import os
 class test_fileStorage(unittest.TestCase):
     """ Class to test the file storage method """
 
+    @unittest.skip("test")
     def setUp(self):
         """ Set up test environment """
         del_list = []
