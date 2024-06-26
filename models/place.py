@@ -2,16 +2,9 @@
 from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
 from models.base_model import BaseModel, Base
 from models import storage_ob
-# from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship
 # from models.review import Review
 # import models
-
-place_amenity = Table('place_amenity', Base.metadata,
-                      Column('place_id', String(60), ForeignKey('places.id'),
-                             primary_key=True, nullable=False),
-                      Column('amenity_id', String(60),
-                             ForeignKey('amenities.id'),
-                             primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -29,8 +22,19 @@ class Place(BaseModel, Base):
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
         amenity_ids = []
-        # reviews = relationship('Review', backref='place',
-        # cascade='all,delete, delete-orphan')
+
+        place_amenity = Table('place_amenity', Base.metadata,
+                              Column(String(60), 'place_id', ForeignKey('places.id'), primary_key=True, nullable=False),
+                              Column(String(60), 'amenity_id', ForeignKey('amenities.id'), primary_key=True, nullable=False)
+                              )
+
+        amenities = relationship(
+            'Amenity',
+            seconadry=place_amenity,
+            back_populates='place_amenities',
+            viewonly=False
+        )
+        # reviews = relationship('Review', backref='place', cascade='all, delete, delete-orphan')
     else:
         # @property
         # def reviews(self):
