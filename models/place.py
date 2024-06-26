@@ -6,11 +6,13 @@ from models import storage_ob
 # from models.review import Review
 # import models
 
-
 place_amenity = Table('place_amenity', Base.metadata,
-                        Column(String(60), 'place_id', ForeignKey('places.id'), primary_key=True, nullable=False),
-                        Column(String(60), 'amenity_id', ForeignKey('amenities.id'), primary_key=True, nullable=False)
-                    )
+                      Column('place_id', String(60), ForeignKey('places.id'),
+                             primary_key=True, nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
+                             primary_key=True, nullable=False))
+
 
 class Place(BaseModel, Base):
     """ A place to stay """
@@ -27,7 +29,8 @@ class Place(BaseModel, Base):
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
         amenity_ids = []
-        # reviews = relationship('Review', backref='place', cascade='all, delete, delete-orphan')
+        # reviews = relationship('Review', backref='place',
+        # cascade='all,delete, delete-orphan')
     else:
         # @property
         # def reviews(self):

@@ -4,6 +4,8 @@ from console import HBNBCommand
 from models.base_model import BaseModel
 from datetime import datetime
 import io
+
+
 class TestHBNBCommandCreate(unittest.TestCase):
 
     def setUp(self):
@@ -26,7 +28,6 @@ class TestHBNBCommandCreate(unittest.TestCase):
     def test_create_valid_class_no_params(self, mock_storage):
         mock_storage.new = MagicMock()
         mock_storage.save = MagicMock()
-        
         with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
             self.cmd.do_create("BaseModel")
             output = mock_stdout.getvalue().strip()
@@ -40,7 +41,6 @@ class TestHBNBCommandCreate(unittest.TestCase):
     def test_create_with_string_param(self, mock_storage):
         mock_storage.new = MagicMock()
         mock_storage.save = MagicMock()
-        
         with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
             self.cmd.do_create('BaseModel name="My_little_house"')
             output = mock_stdout.getvalue().strip()
@@ -53,7 +53,6 @@ class TestHBNBCommandCreate(unittest.TestCase):
     def test_create_with_integer_param(self, mock_storage):
         mock_storage.new = MagicMock()
         mock_storage.save = MagicMock()
-        
         with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
             self.cmd.do_create('BaseModel number=123')
             output = mock_stdout.getvalue().strip()
@@ -67,7 +66,6 @@ class TestHBNBCommandCreate(unittest.TestCase):
     def test_create_with_float_param(self, mock_storage):
         mock_storage.new = MagicMock()
         mock_storage.save = MagicMock()
-        
         with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
             self.cmd.do_create('BaseModel number="123.456"')
             output = mock_stdout.getvalue().strip()
@@ -76,6 +74,7 @@ class TestHBNBCommandCreate(unittest.TestCase):
             new_instance = mock_storage.new.call_args[0][0]
             self.assertIsInstance(new_instance, BaseModel)
             self.assertEqual(new_instance.number, "123.456")
+
 
 if __name__ == '__main__':
     unittest.main()
