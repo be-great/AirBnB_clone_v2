@@ -7,6 +7,11 @@ from models import storage_ob
 # import models
 
 
+place_amenity = Table('place_amenity', Base.metadata,
+                        Column(String(60), 'place_id', ForeignKey('places.id'), primary_key=True, nullable=False),
+                        Column(String(60), 'amenity_id', ForeignKey('amenities.id'), primary_key=True, nullable=False)
+                    )
+
 class Place(BaseModel, Base):
     """ A place to stay """
     if storage_ob == "db":
@@ -45,11 +50,6 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
-
-    place_amenity = Table('place_amenity', Base.metadata,
-                          Column(String(60), 'place_id', ForeignKey('places.id'), primary_key=True, nullable=False),
-                          Column(String(60), 'amenity_id', ForeignKey('amenities.id'), primary_key=True, nullable=False)
-                          )
 
     def __init__(self, *args, **kwargs):
         """Initializes user"""
