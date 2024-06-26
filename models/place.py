@@ -24,8 +24,10 @@ class Place(BaseModel, Base):
         amenity_ids = []
 
         # place_amenity = Table('place_amenity', Base.metadata,
-        #                       Column(String(60), 'place_id', ForeignKey('places.id'), primary_key=True, nullable=False),
-        #                       Column(String(60), 'amenity_id', ForeignKey('amenities.id'), primary_key=True, nullable=False)
+        #                       Column(String(60), 'place_id',
+        # ForeignKey('places.id'), primary_key=True, nullable=False),
+        #                       Column(String(60), 'amenity_id',
+        # ForeignKey('amenities.id'), primary_key=True, nullable=False)
         #                       )
 
         # amenities = relationship(
@@ -34,7 +36,8 @@ class Place(BaseModel, Base):
         #     back_populates='place_amenities',
         #     viewonly=False
         # )
-        # reviews = relationship('Review', backref='place', cascade='all, delete, delete-orphan')
+        # reviews = relationship('Review', backref='place',
+        # cascade='all, delete, delete-orphan')
     else:
         # @property
         # def reviews(self):
@@ -58,6 +61,6 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
-    # def __init__(self, *args, **kwargs):
-    #     """Initializes user"""
-    #     super().__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        """Initializes user"""
+        super().__init__(*args, **kwargs)
