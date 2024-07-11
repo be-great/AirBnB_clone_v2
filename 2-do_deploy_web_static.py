@@ -36,7 +36,7 @@ def do_deploy(archive_path):
         run(f"rm -rf /data/web_static/releases/{arch_base}/web_static")
         run(f"rm -rf /data/web_static/current")
         cmd0 = f"ln -s /data/web_static/releases/{arch_base}/ "
-        cmd = "/data/web_static/current"
+        cmd = cmd0 + "/data/web_static/current"
         # Create new symbolic link pointing to the new release
         run(cmd)
         return True
