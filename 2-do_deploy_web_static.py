@@ -22,25 +22,23 @@ def do_deploy(archive_path):
 
         # Create directory for new release
         run(f"mkdir -p /data/web_static/releases/{arch_base}")
-        cmd0 = f"tar -xzf /tmp/{arch_name} -C "
-        cmd = cmd0 + f"/data/web_static/releases/{arch_base}/"
+        cmd0 = "tar -xzf /tmp/{arch_name} -C "
+        cmd = cmd0 + f"/data/web_static/releases/{arch_base}/" 
         # Extract archive to the new release directory
         run(cmd)
-
         # Remove the uploaded archive from /tmp/
         run(f"rm /tmp/{arch_name}")
+        # mv the web_static
         cmd0 = f"mv /data/web_static/releases/{arch_base}/web_static/* "
-        cmd = f"/data/web_static/releases/{arch_base}/"
-        # Delete existing symbolic link
+        cmd  = f"/data/web_static/releases/{arch_base}/"
         run(cmd)
+        # Delete existing symbolic link
         run(f"rm -rf /data/web_static/releases/{arch_base}/web_static")
-        run(f" rm -rf /data/web_static/current")
+        run(f"rm -rf /data/web_static/current")
         cmd0 = f"ln -s /data/web_static/releases/{arch_base}/ "
         cmd = "/data/web_static/current"
         # Create new symbolic link pointing to the new release
         run(cmd)
-
         return True
-
     except Exception as e:
         return False
