@@ -5,7 +5,7 @@ from fabric.api import local
 import os
 
 
-def do_pack(c):
+def do_pack():
     """create compression file"""
     if not os.path.exists("versions"):
         os.makedirs("versions")
