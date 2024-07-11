@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 """ 1. Compress before sending"""
-from fabric import task 
 from datetime import datetime
+from fabric.api import local
 import os
 
 
-@task
 def do_pack(c):
     """create compression file"""
     if not os.path.exists("versions"):
@@ -15,7 +14,7 @@ def do_pack(c):
 
     # Create the archive
     try:
-        c.local(f"tar -czvf {archive_name} web_static")
+        local(f"tar -czvf {archive_name} web_static")
         return archive_name
     except Exception as e:
         return None
