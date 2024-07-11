@@ -29,9 +29,12 @@ def do_deploy(archive_path):
 
         # Remove the uploaded archive from /tmp/
         run(f"rm /tmp/{arch_name}")
-
+        cmd0 = f"mv /data/web_static/releases/{arch_base}/web_static/* "
+        cmd = f"/data/web_static/releases/{arch_base}/"
         # Delete existing symbolic link
-        run(f"rm /data/web_static/current")
+        run(cmd)
+        run(f"rm -rf /data/web_static/releases/{arch_base}/web_static")
+        run(f" rm -rf /data/web_static/current")
         cmd0 = f"ln -s /data/web_static/releases/{arch_base}/ "
         cmd = "/data/web_static/current"
         # Create new symbolic link pointing to the new release
