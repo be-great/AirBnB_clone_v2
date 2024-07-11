@@ -1,35 +1,42 @@
 #!/usr/bin/python3
 """ 1. Compress before sending"""
-from fabric.api import local, env, put, run
+from fabric.api import env, put, run, task
 import os
-
 
 env.hosts = ['100.25.46.0', '54.210.60.100']
 
-
+@task
 def do_deploy(archive_path):
-    """create compression file"""
+    """Deploy a compressed archive to the web servers."""
     if not os.path.exists(archive_path):
+        print(f"Error: Archive file '{archive_path}' not found.")
         return False
+    
     try:
         arch_name = os.path.basename(archive_path)
         arch_base = os.path.splitext(arch_name)[0]
-        # upload it to the archive
+        
+        # Upload archive to /tmp/ directory on remote server
         put(archive_path, "/tmp/")
-        # mkdir of data/web_static
+        
+        # Create directory for new release
         run(f"mkdir -p /data/web_static/releases/{arch_base}")
-        # uncompress archive
-        cmd0 = f"tar -xzf /tmp/{arch_name} -C "
-        cmd = cmd0 + "/data/web_static/releases/{arch_base}/"
-        run(cmd)
-        # Delete the archive
+        
+        # Extract archive to the new release directory
+        run(f"tar -xzf /tmp/{arch_name} -C /data/web_static/releases/{arch_base}/")
+        
+        # Remove the uploaded archive from /tmp/
         run(f"rm /tmp/{arch_name}")
-        # Delete the symbolic link
+        
+        # Delete existing symbolic link
         run(f"rm /data/web_static/current")
-        # create the new symbolic link
-        cmd0 = f"ln -s /data/web_static/releases/{arch_base} "
-        cmd = cmd0 + "/data/web_static/current"
-        run(cmd)
+        
+        # Create new symbolic link pointing to the new release
+        run(f"ln -s /data/web_static/releases/{arch_base}/ /data/web_static/current")
+        
+        print("Deployment successful!")
         return True
+    
     except Exception as e:
+        print(f"Error deploying: {e}")
         return False
