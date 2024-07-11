@@ -23,14 +23,14 @@ def do_deploy(archive_path):
         # Create directory for new release
         run(f"mkdir -p /data/web_static/releases/{arch_base}")
         cmd0 = f"tar -xzf /tmp/{arch_name} -C "
-        cmd = cmd0 + f"/data/web_static/releases/{arch_base}/" 
+        cmd = cmd0 + f"/data/web_static/releases/{arch_base}/"
         # Extract archive to the new release directory
         run(cmd)
         # Remove the uploaded archive from /tmp/
         run(f"rm /tmp/{arch_name}")
         # mv the web_static
         cmd0 = f"mv /data/web_static/releases/{arch_base}/web_static/* "
-        cmd  = f"/data/web_static/releases/{arch_base}/"
+        cmd = f"/data/web_static/releases/{arch_base}/"
         run(cmd)
         # Delete existing symbolic link
         run(f"rm -rf /data/web_static/releases/{arch_base}/web_static")
