@@ -22,7 +22,7 @@ def do_deploy(archive_path):
 
         # Create directory for new release
         run(f"mkdir -p /data/web_static/releases/{arch_base}")
-        cmd0 = "tar -xzf /tmp/{arch_name} -C "
+        cmd0 = f"tar -xzf /tmp/{arch_name} -C "
         cmd = cmd0 + f"/data/web_static/releases/{arch_base}/" 
         # Extract archive to the new release directory
         run(cmd)
