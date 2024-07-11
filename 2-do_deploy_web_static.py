@@ -9,7 +9,6 @@ env.hosts = ['100.25.46.0', '54.210.60.100']
 def do_deploy(archive_path):
     """Deploy a compressed archive to the web servers."""
     if not os.path.exists(archive_path):
-        print(f"Error: Archive file '{archive_path}' not found.")
         return False
     
     try:
@@ -33,10 +32,7 @@ def do_deploy(archive_path):
         
         # Create new symbolic link pointing to the new release
         run(f"ln -s /data/web_static/releases/{arch_base}/ /data/web_static/current")
-        
-        print("Deployment successful!")
         return True
     
     except Exception as e:
-        print(f"Error deploying: {e}")
         return False
