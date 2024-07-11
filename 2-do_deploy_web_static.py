@@ -17,7 +17,7 @@ def do_deploy(archive_path):
         # upload it to the archive
         put(archive_path, "/tmp/")
         # mkdir of data/web_static
-        run(f"sudo mkdir -p /data/web_static/releases/{arch_base}")
+        run(f"mkdir -p /data/web_static/releases/{arch_base}")
         # uncompress archive
         cmd0 = f"tar -xzf /tmp/{arch_name} -C "
         cmd = cmd0 + "/data/web_static/releases/{arch_base}"
