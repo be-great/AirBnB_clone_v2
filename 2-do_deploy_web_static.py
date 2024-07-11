@@ -20,7 +20,7 @@ def do_deploy(archive_path):
         run(f"mkdir -p /data/web_static/releases/{arch_base}")
         # uncompress archive
         cmd0 = f"tar -xzf /tmp/{arch_name} -C "
-        cmd = cmd0 + "/data/web_static/releases/{arch_base}"
+        cmd = cmd0 + "/data/web_static/releases/{arch_base}/"
         run(cmd)
         # Delete the archive
         run(f"rm /tmp/{arch_name}")
