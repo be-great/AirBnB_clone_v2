@@ -16,6 +16,8 @@ def do_deploy(archive_path):
         arch_base = os.path.splitext(arch_name)[0]
         # upload it to the archive
         put(archive_path, "/tmp/")
+        # mkdir of data/web_static
+        run(f"mkdir -p /data/web_static/releases/{arch_base}")
         # uncompress archive
         cmd0 = f"tar -xzf /tmp/{arch_name} -C "
         cmd = cmd0 + "/data/web_static/releases/{arch_base}"
