@@ -30,7 +30,7 @@ def do_deploy(archive_path):
         run(f"rm /tmp/{arch_name}")
         # mv the web_static
         cmd0 = f"mv /data/web_static/releases/{arch_base}/web_static/* "
-        cmd = f"/data/web_static/releases/{arch_base}/"
+        cmd = cmd0 + f"/data/web_static/releases/{arch_base}/"
         run(cmd)
         # Delete existing symbolic link
         run(f"rm -rf /data/web_static/releases/{arch_base}/web_static")
