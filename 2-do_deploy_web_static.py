@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 """ 1. Compress before sending"""
-from fabric.api import local, env, put, run, task
+from fabric.api import local, env, put, run
 import os
 
 
 env.hosts = ['100.25.46.0', '54.210.60.100']
 
 
-@task
 def do_deploy(archive_path):
     """create compression file"""
     if not os.path.exists(archive_path):
