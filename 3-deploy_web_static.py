@@ -5,6 +5,8 @@ import os
 
 
 env.hosts = ['100.25.46.0', '54.210.60.100']
+
+
 def do_pack():
     """create compression file"""
     if not os.path.exists("versions"):
@@ -19,7 +21,7 @@ def do_pack():
     except Exception as e:
         return None
 
-@task
+
 def do_deploy(archive_path):
     """ Deploy a compressed archive to the web servers. """
     if not os.path.exists(archive_path):
@@ -54,10 +56,3 @@ def do_deploy(archive_path):
         return True
     except Exception as e:
         return False
-
-def deploy():
-    """Full deployment """
-    path = do_pack()
-    if path == None:
-        return False
-    return do_deploy(path)
