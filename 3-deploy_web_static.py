@@ -2,6 +2,7 @@
 """ 1. Compress before sending """
 from fabric.api import env, put, run, task
 import os
+from datetime import datetime
 
 
 env.hosts = ['100.25.46.0', '54.210.60.100']
