@@ -63,5 +63,6 @@ def deploy():
     """Full deployment """
     path = do_pack()
     if path is None:
+        print("Fail")
         return False
     return do_deploy(path)
