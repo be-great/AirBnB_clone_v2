@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ 1. Compress before sending """
-from fabric.api import env, put, run, task
+from fabric.api import env, put, run, local, task
 import os
 from datetime import datetime
 
@@ -20,6 +20,7 @@ def do_pack():
         local(f"tar -czvf {archive_name} web_static")
         return archive_name
     except Exception as e:
+        print(e)
         return None
 
 
