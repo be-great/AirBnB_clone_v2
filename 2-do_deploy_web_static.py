@@ -9,7 +9,7 @@ env.hosts = ['34.232.76.39', '52.91.132.184']
 
 def do_deploy(archive_path):
     """ Deploy a compressed archive to the web servers. """
-    if not os.exists(archive_path):
+    if not os.path.exists(archive_path):
         return False
     arch_name = archive_path.split('/')[-1]
     arch_base0 = '/data/web_static/releases/'
