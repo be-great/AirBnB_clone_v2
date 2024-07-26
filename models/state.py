@@ -4,8 +4,8 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from models import storage_ob
 from sqlalchemy.orm import relationship
-
-
+from models import storage
+from models.city import City
 class State(BaseModel, Base):
     """ State class """
     if storage_ob == 'db':
@@ -18,3 +18,12 @@ class State(BaseModel, Base):
     def __init__(self, *args, **kwargs):
         """Initializes user"""
         super().__init__(*args, **kwargs)
+
+    # getter
+    @property
+    def cities(self):
+        """return the cities"""
+        if storage_ob == 'db':
+            cities = storage.all(City)
+            status_cities = [c for c in cities.values() if c.state_id == self.id]
+            return status_cities
