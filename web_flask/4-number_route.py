@@ -22,7 +22,7 @@ def hbnb():
 def text(text):
     """display the text"""
     new_text = text.replace("_", " ")
-    return f'C {text}'
+    return f'C {new_text}'
 
 
 @app.route('/python/', defaults={"text": "is cool"}, strict_slashes=False)
@@ -30,7 +30,7 @@ def text(text):
 def text_with_default(text):
     """display the text wiht default value"""
     new_text = text.replace("_", " ")
-    return f'Python {text}'
+    return f'Python {new_text}'
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
