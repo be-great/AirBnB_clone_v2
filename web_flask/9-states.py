@@ -9,11 +9,13 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 
-@app.route('/states', defaults={'id': None})
-@app.route('/states/<id>')
+@app.route('/states', strict_slashes=False)
+@app.route('/states/<id>', strict_slashes=False)
 def states(id):
     """displays a html page  with states"""
     states = storage.all(State)
+    if id is not None:
+        id = 'State.' + id
     return render_template('8-cities_by_states.html',
                            states=states,
                            id=id)
