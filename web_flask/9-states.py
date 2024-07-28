@@ -11,7 +11,7 @@ app.url_map.strict_slashes = False
 
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<id>', strict_slashes=False)
-def states(id):
+def states(id=None):
     """displays a html page  with states"""
     states = storage.all(State)
     if id is not None:
