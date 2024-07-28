@@ -25,6 +25,8 @@ class State(BaseModel, Base):
     @property
     def cities(self):
         """return the cities"""
-        cities = models.storage.all(City)
-        status_cities = [c for c in cities.values() if c.state_id == self.id]
-        return status_cities
+        if storage_ob != 'db':
+            cities = models.storage.all(City)
+            status_cities = [c for c in cities.values() if c.state_id == self.id]
+            return status_cities
+        return []
