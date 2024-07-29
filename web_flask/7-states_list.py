@@ -4,20 +4,20 @@ from flask import Flask, render_template
 from models import storage
 from models.state import State
 app = Flask(__name__)
-"""match both /name and /name/ and not only /name"""
-
-
-@app.route('/states_list', strict_slashes=False)
-def states_list():
-    """display a HTML page with the states listed in alphabetical order"""
-    states = sorted(list(storage.all("State").values()), key=lambda x: x.name)
-    return render_template('7-states_list.html', states=states)
 
 
 @app.teardown_appcontext
 def teardown_db(exception):
     """closes the storage"""
     storage.close()
+
+
+@app.route('/states_list', strict_slashes=False)
+def list_states():
+    """display HBNB"""
+    state = storage.all(State)
+    sorted_state = sorted(list(state.values()), key=lambda state: state.name)
+    return render_template("7-states_list.html", states=sorted_state)
 
 
 if __name__ == '__main__':
